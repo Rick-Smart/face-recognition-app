@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import HomeScreen from "./Views/HomeScreen";
+import SignInScreen from "./Views/SignInScreen";
 
 function App() {
+  const [route, setRoute] = useState("signIn");
+  const [currentUser, setUser] = useState({
+    id: '',
+    name: '',
+    email: '',
+    entries: '',
+    joined: '',
+  });
+  // const [isSignedIn, setIsSignedIn] = useState(false);
+
+  function onRouteChange(route) {
+    setRoute(route);
+  }
+
+  function loadUser(user) {
+    setUser({
+      id: user.ID,
+      name: user.NAME,
+      email: user.EMAIL,
+      entries: user.ENTRIES,
+      joined: user.JOINED
+    })
+    
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {route === "Home" ? (
+        <HomeScreen onRouteChange={onRouteChange} currentUser={currentUser} setUser={setUser}/>
+      ) : (
+        <SignInScreen route={route} onRouteChange={onRouteChange} loadUser={loadUser}/>
+      )}
     </div>
   );
 }
