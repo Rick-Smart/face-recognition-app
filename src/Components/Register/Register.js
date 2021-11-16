@@ -15,7 +15,7 @@ function Register({ onRouteChange, loadUser }) {
       return;
     }
 
-    fetch("http://localhost:3001/register", {
+    fetch("https://face-recognition-5000.herokuapp.com/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -26,7 +26,7 @@ function Register({ onRouteChange, loadUser }) {
     })
       .then((response) => response.json())
       .then((user) => {
-        if (user) {
+        if (user.ID) {
           loadUser(user);
           nameRef.current.value = "";
           emailRef.current.value = "";

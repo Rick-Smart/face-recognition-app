@@ -9,7 +9,7 @@ import Clarifai from "clarifai";
 require("dotenv").config();
 
 const app = new Clarifai.App({
-  apiKey: process.env.CLARIFAI_API,
+  apiKey: `${process.env.CLARIFAI_API}`,
 });
 
 function HomeScreen({ onRouteChange, currentUser, setUser }) {
@@ -29,7 +29,7 @@ function HomeScreen({ onRouteChange, currentUser, setUser }) {
       .predict(Clarifai.FACE_DETECT_MODEL, picUrl)
       .then((response) => {
         if (response) {
-          fetch("http://localhost:3001/image", {
+          fetch("https://face-recognition-5000.herokuapp.com/image", {
             method: "put",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({
