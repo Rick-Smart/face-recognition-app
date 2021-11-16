@@ -9,7 +9,7 @@ import Clarifai from "clarifai";
 require("dotenv").config();
 
 const app = new Clarifai.App({
-  apiKey: process.env.CLARIFAI_API,
+  apiKey: `${process.env.CLARIFAI_API}`,
 });
 
 function HomeScreen({ onRouteChange, currentUser, setUser }) {
